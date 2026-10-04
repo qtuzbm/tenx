@@ -1,0 +1,40 @@
+[package]
+name = "tenx_spiral"
+version = "3.2.0"
+description = "TenX 10x vault for a pump.fun coin (Solana port of SpiralVault 3.2.0)"
+edition.workspace = true
+rust-version.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "tenx_spiral"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+anchor-lang = "1.2.0"
+anchor-spl = { version = "1.2.0", default-features = false, features = ["token", "token_2022", "associated_token"] }
+bytemuck = { version = "1", features = ["derive", "min_const_generics"] }
+
+[dev-dependencies]
+litesvm = "0.10.0"
+solana-message = "3.0.1"
+solana-transaction = "3.0.2"
+solana-signer = "3.0.0"
+solana-keypair = "3.0.1"
+solana-account = "3.2.0"
+serde_json = "1"
+base64 = "0.22"
+solana-clock = "3.0"
+solana-system-interface = { version = "2", features = ["bincode"] }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
